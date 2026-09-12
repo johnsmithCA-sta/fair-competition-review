@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.pyc
+.preflight-waiver.json
+
+# 审查运行时产物（脚本在用户工作目录生成）
+policy.txt
+prescreen.md
+prescreen.json
+公平竞争审查报告_*.md
+公平竞争审查表_*.md
