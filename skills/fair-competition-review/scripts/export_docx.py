@@ -229,7 +229,8 @@ def blocks_to_body(blocks) -> str:
         if kind == "h":
             lvl, txt = val
             sz = {1: H1_SZ, 2: H2_SZ, 3: H3_SZ}.get(lvl, H3_SZ)
-            out.append(para(run_xml(txt, bold=True, sz=sz),
+            out.append(para("".join(run_xml(t, bold=True, mono=m, sz=sz)
+                                    for t, _b, m in inline_runs(txt)),
                             align="center" if lvl == 1 else None,
                             space_before=200 if lvl > 1 else 0, space_after=120))
         elif kind == "p":
@@ -245,7 +246,8 @@ def blocks_to_body(blocks) -> str:
         elif kind == "table":
             out.append(table_xml(val))
         elif kind == "quote":
-            out.append(para(run_xml(val, sz=BODY_SZ - 2, color="595959"), indent=240))
+            out.append(para("".join(run_xml(t, b, m, sz=BODY_SZ - 2, color="595959")
+                                    for t, b, m in inline_runs(val)), indent=240))
         elif kind == "code":
             for ln in val:
                 out.append(para(run_xml(ln or " ", mono=True, sz=BODY_SZ - 4),
