@@ -1,6 +1,6 @@
 # fair-competition-review
 
-> **政策措施公平竞争审查技能** —— 把一份政策草案，变成一份每条风险都能回溯到法条原文的审查报告和《公平竞争审查表》。
+> **政策措施公平竞争审查技能** —— 把一份政策草案，变成一份每条风险都能回溯到法条原文的审查报告和《公平竞争审查表》，并可直接导出 Word 进入发文流程。
 
 `公平竞争审查` · `政策措施` · `合规审查` | MIT License | Python 3.8+ (stdlib only)
 
@@ -11,7 +11,7 @@
 | [`SKILL.md`](skills/fair-competition-review/SKILL.md) | 完整工作流、适用与触发、边界与示例 |
 | [`README.md`](skills/fair-competition-review/README.md) | 能力概览、对比、快速上手、产出物 |
 | `references/` | 四类 66 项审查标准清单、法条溯源映射、审查表模板、版本史 |
-| `scripts/` | 正文提取（docx / txt / md）与关键词预筛（零第三方依赖） |
+| `scripts/` | 正文提取（docx / txt / md）、关键词预筛、报告与审查表转 `.docx`（零第三方依赖） |
 
 ---
 
@@ -23,7 +23,7 @@
 2. **逐条扫描定级** —— 每条风险给出条款位置、原文摘录、违反标准编号、风险等级、修改建议；
 3. **法条依据溯源** —— 每条规定「法规全称 + 条号 + 原文链接」，附索引汇总表；
 4. **判断例外情形** —— 按《条例》第 12 条论证三要件，不把可保留条款判死；
-5. **成文输出** —— 审查报告 + 官方通用格式《公平竞争审查表》。
+5. **成文输出** —— 审查报告 + 官方通用格式《公平竞争审查表》，需要时可一键转 `.docx`。
 
 ## 快速上手
 
@@ -38,6 +38,11 @@ python3 scripts/scan_rules.py policy.txt --format md --out prescreen.md
 
 #    只看高危信号：
 python3 scripts/scan_rules.py policy.txt --strong-only
+
+# 3. 逐条语义核对 → 挂法条依据 → 出报告与审查表
+
+# 4. 要 Word 版就直接转
+python3 scripts/export_docx.py 公平竞争审查表_XX办法.md --out 审查表.docx
 ```
 
 > ⚠️ 预筛命中不等于违规，**零命中也不等于无风险**——两种情况都要回原文逐条语义核对。
